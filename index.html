@@ -2,7 +2,7 @@
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
 </head>
-<body>
+<body id="body">
 <style>
 * {
     text-align:center;
@@ -44,5 +44,5 @@ p {
 </p>
 <br>
 <p>...Or, look at some other stuff below.</p>
-
+<a>Change the background color here:</a><input id="background-color" type="color" value="#daa06d" onchange="document.getElementById('body').style='padding:10px;border:2px solid #2a263b;background-color:'+document.getElementById('background-color').value+';'" />
 </body>
