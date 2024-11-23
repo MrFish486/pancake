@@ -1,0 +1,155 @@
+<body>
+<canvas id="game" height="500" width="500" style="border:2px solid black;"></canvas>
+<script>
+class ant{
+	constructor(x,y){
+		this.x=x
+		this.y=y
+	}
+}
+class board{
+	constructor(h,w,random){
+		this.ant=undefined
+		this.h=h
+		this.w=w
+		this.random=random
+		this.b=[]
+		this.AHL=false //Ant Heading Left; if AHL, ant goes <, else ant goes >
+		if (random){
+			for (let i=0;i<w;i++){
+				this.b.push([])
+				for (let o=0;o<h;o++){
+					this.b[i].push(Math.round(Math.random()))
+				}
+			}
+		}
+	}
+	foo(){
+		let c=document.getElementById("game")
+		c.getContext("2d").clearRect(0,0,c.width,c.height)
+		let canvas=c.getContext("2d")
+		canvas.clearRect(0,0,this.w,this.h)
+		canvas.beginPath()
+		canvas.fillStyle="black"
+		for (let x=0;x<this.w;x++){
+			for (let y=0;y<this.h;y++){
+				if(this.b[x][y]==1){
+					canvas.rect(x*10,y*10,10,10)
+					canvas.fill()
+				}
+			}
+		}
+		canvas.closePath()
+		canvas.beginPath()
+		//Ants:
+		canvas=c.getContext("2d")
+		if (this.ant){
+			canvas.rect(this.ant.x*10,this.ant.y*10,10,10)
+			canvas.fillStyle="brown"
+			canvas.fill()
+		}
+		canvas.closePath()
+		
+	}
+	addAnt(x,y){
+		this.ant=new ant(x,y)
+	}
+	antTick(){
+		try{
+			if (this.b[this.ant.x][this.ant.y+1]==0){ //Down
+				this.ant.y+=1
+				return
+			}
+		}catch{}
+
+
+		if (this.AHL){
+			try{
+				if (this.b[this.ant.x-1][this.ant.y]==0){//Left
+					this.ant.x-=1
+					return
+				}
+			}catch{}
+                        try{
+                                if (this.b[this.ant.x-1][this.ant.y+1]==0){
+                                        this.ant.x-=1
+                                        this.ant.y+=1
+                                        this.AHL=true
+                                        return
+                                }
+                        }catch{}
+			try{
+				if (this.b[this.ant.x+1][this.ant.y]==0){//Right
+					this.ant.x+=1
+					this.AHL=false
+					return
+				}
+			}catch{}
+                        try{
+                                if (this.b[this.ant.x+1][this.ant.y+1]==0){
+                                        this.ant.x+=1
+                                        this.ant.y+=1
+                                        return
+                                }
+                        }catch{}
+		} else {
+                        try{
+                                if (this.b[this.ant.x+1][this.ant.y]==0){//Right
+                                        this.ant.x+=1
+                                        return
+                                }
+                        }catch{}
+			try{
+				if (this.b[this.ant.x+1][this.ant.y+1]==0){
+					this.ant.x+=1
+					this.ant.y+=1
+					return
+				}
+			}catch{}
+                        try{
+                                if (this.b[this.ant.x-1][this.ant.y]==0){//Left
+                                        this.ant.x-=1
+					this.AHL=true
+                                        return
+                                }
+			}catch{}
+			try{
+				if (this.b[this.ant.x-1][this.ant.y+1]==0){
+					this.ant.x-=1
+					this.ant.y+=1
+					this.AHL=true
+					return
+				}
+			}catch{}
+
+		}
+		try{
+			if (this.b[this.ant.x][this.ant.y-1]==0){
+				this.ant.y-=1
+				return
+			}
+		}catch{}
+	}
+	placeAnt(){
+		for (let x=0;x<this.w;x++){
+			for (let y=0;y<this.h;y++){
+				if (this.b[x][y]==0){
+					this.addAnt(x,y)
+					break
+				}
+			}
+		}
+	}
+}
+x=new board(50,50,true)
+x.foo()
+x.placeAnt()
+setInterval(function(){x.antTick();x.foo()},100)
+</script>
+<br>
+<a>H:</a><input type="range" min="1" max="500" id="h" value="50" />
+<br>
+<a>W:</a><input type="range" min="1" max="500" id="w" value="50" />
+<br>
+<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,true);x.placeAnt();x.foo()">Generate!</button>
+</body>

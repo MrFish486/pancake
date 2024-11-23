@@ -1,0 +1,291 @@
+<head> 
+<title id="title">Otus</title>
+<link id="icon" rel="icon" href="https://my.otus.com/assets/images/favicon_v2.ico">
+</head>
+<body style="background-color: gainsboro;" onload="failsafe(true);off(true);acc(false);update()" id="body">
+<a>Use these tools to change the apperance of the tab (default appereance is otus):</a>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="yellow" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="blue">Tab icon</text>
+</svg>
+<input id="tab.icon"></input><button onclick="document.getElementById('icon').href=document.getElementById('tab.icon').value" style="background-color:yellow;color:blue;">Update</button>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="yellow" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="blue">Tab title</text>
+</svg>
+<input id="tab.title"></input><button onclick="document.getElementById('title').innerHTML=document.getElementById('tab.title').value" style="background-color:yellow;color:blue;">Update</button>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="blue" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="yellow">Credits</text>
+</svg>
+<button style="background-color:yellow;color:blue;" onclick="alert('All by Laszlo Pav, do not distribute without permission!')">Ooh! Tell me! I'm so interested!</button>
+<br>
+<hr style="border-top:2px solid black;">
+<script>
+fanspeed=0
+power=false
+temp=0
+bat=0
+blowc=10
+over=false
+password=1371207401
+comp=false
+safe=false
+speed=0.05
+ac=false
+String.prototype.hashCode = function() {
+  var hash = 0,
+    i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr = this.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0;
+  }
+  return hash;
+}
+function fanspeedUpdate(){
+	fanspeed=document.getElementById("fanspeed").value
+	document.getElementById("fanspeedIndicator").innerHTML="Pump speed:"+fanspeed
+}
+function failsafe(t){
+	if(t){
+		safe=true
+		document.getElementById("fs.on").style="background-color:green;"
+		document.getElementById("fs.off").style="background-color:red;"
+	} else {
+		safe=false
+		document.getElementById("fs.on").style="background-color:red;"
+		document.getElementById("fs.off").style="background-color:green;"
+	}
+}
+function acc(a){
+	if(a){
+		ac=true
+		document.getElementById("ac-on").style="background-color:green;"
+		document.getElementById("ac-off").style="background-color:red;"
+	} else {
+		ac=false
+		document.getElementById("ac-on").style="background-color:red;"
+		document.getElementById("ac-off").style="background-color:green;"
+	}
+}
+function on(safea){
+	power=true
+	document.getElementById("on").style="background-color: green;"
+	document.getElementById("off").style="background-color: red;"
+	if(!(safea)){
+		getBlow()
+	}
+}
+function off(safea){
+	power=false
+	document.getElementById("on").style="background-color: red;"
+	document.getElementById("off").style="background-color: green;"
+	if (!(safea)){
+		getBlow()
+	}
+}
+function getBlow(){
+	if(Math.floor(Math.random() * blowc)==0){
+		if(!(safe)){
+			document.getElementById("body").innerHTML='<svg height="50" width="500"><rect width="500px" height="50px" fill="red" /><text x="250" y="40" font-size="40" text-anchor="middle" fill="green">You lost!</text></svg><br><a>Reactor blew up due to unsafe protocols relating the control rods.</a><br><button onclick="location.reload(true)" style="background-color:yellow;color:blue">Restart</button>'
+		} else {
+			document.getElementById("body").innerHTML='<svg height="50" width="500"><rect width="500px" height="50px" fill="red" /><text x="250" y="40" font-size="40" text-anchor="middle" fill="green">You lost!</text></svg><br><a>Reactor blew up due to unsafe protocols relating the control rods; rods were dropped due to autosafe.</a><br><button onclick="location.reload(true)" style="background-color:yellow;color:blue">Restart</button>'
+		}
+		over=true
+	}
+}
+function cleanLoss(m){
+	document.getElementById("body").innerHTML='<svg height="50" width="500"><rect width="500px" height="50px" fill="red" /><text x="250" y="40" font-size="40" text-anchor="middle" fill="green">You lost!</text></svg><br><a>'+m+'</a><br><button onclick="location.reload(true)" style="background-color:yellow;color:blue">Restart</button>'
+	over=true
+}
+function update(){
+	setInterval(function(){
+		if (!(over)){
+			if(power){
+				if(fanspeed>75 && temp<100 && temp>-1){
+					temp-=1
+				}
+				if(fanspeed<75 && temp>-2 && temp<100){
+					temp+=1
+				}
+			if (bat<100){
+				bat+=speed
+			}
+			} else if (!(power)) {
+				if (temp>0){
+					temp-=0.25
+				}
+			}
+			document.getElementById("temp").value=temp
+			document.getElementById("bat").value=bat
+			document.getElementById("chance").innerHTML="1 in "+blowc
+			document.getElementById("efficiency").innerHTML=speed.toFixed(2)
+			if(temp>99 && !(safe)){
+				cleanLoss("Reactor overheated!")
+			}
+			if(safe && temp>60){
+				off()
+			}
+			if(comp){
+				document.getElementById("comp-temp").innerHTML="Temperature(K°):"+Math.round((temp*31.2))
+				document.getElementById("comp-bat").innerHTML="Battery:"+Math.round(bat)
+			}
+			if(bat>10){
+				document.getElementById("buy-blowc").style="background-color:green;color:red;"
+				document.getElementById("buy-speed").style="background-color:green;color:red;"
+			} else {
+				document.getElementById("buy-blowc").style="background-color:red;color:green;"
+				document.getElementById("buy-speed").style="background-color:red;color:green;"
+			}
+			if(power){
+				document.getElementById("control-rods-up-down").y.baseVal.value=0
+				document.getElementById("cr1").style.visibility="visible"
+				document.getElementById("cr2").style.visibility="visible"
+				document.getElementById("cr3").style.visibility="visible"
+				document.getElementById("cr4").style.visibility="visible"
+				document.getElementById("cr5").style.visibility="visible"
+				document.getElementById("cr6").style.visibility="visible"
+			} else {
+				document.getElementById("control-rods-up-down").y.baseVal.value=75
+				document.getElementById("cr1").style.visibility="hidden"
+				document.getElementById("cr2").style.visibility="hidden"
+				document.getElementById("cr3").style.visibility="hidden"
+				document.getElementById("cr4").style.visibility="hidden"
+				document.getElementById("cr5").style.visibility="hidden"
+				document.getElementById("cr6").style.visibility="hidden"
+			}
+			if(temp>66 && temp<99){
+				document.getElementById("body").style="background-color:brown;"
+			} else {
+				document.getElementById("body").style="background-color:gainsboro;"
+			}
+			if(ac && temp<10 && !(power)){
+				on()
+			}
+		}
+	},100)
+}
+function validate(){
+	// Good luck breaking in...    ...It's hashed! One way encryption!
+	if (document.getElementById("password-form").value.hashCode() == 1371207401){
+		return true
+	} else {
+		return false
+		}
+}
+function o(x){if(x){comp=true;document.getElementById("computer-controls").innerHTML='<button onclick="failsafe(false);getBlow();failsafe(true)" style="background-color:green;color:yellow;">Test control rods</button><br><a id="comp-temp" style="background-color:green;color:yellow;"></a><br><a id="comp-bat" style="background-color:green;color:yellow;"></a><br><select id="action" style="background-color:green;color:yellow;"><option value="0">None</option><option value="1">Meltdown procedure</option><option value=2>Cooldown</option><option value=3>Lose</option></select><button style="background-color:green;color:yellow;" onclick="if(document.getElementById(\'action\').value==1){for(let i=0;i<100;i++){setTimeout(function(){temp+=1;document.getElementById(\'temp\').value=temp},1000)}}else if(document.getElementById(\'action\').value==2){temp=0}else if(document.getElementById(\'action\').value==3){cleanLoss(\'Why would you click lose?!\')}">Start</button><br><button style="background-color:green;color:yellow;" onclick="document.getElementById(\'computer-controls\').innerHTML=\'\';comp=false">Close</button>'}else{document.getElementById("computer-controls").innerHTML='';comp=false}}
+</script>
+<div id="control" style="border:2px solid black;">
+<svg height="50" width="500"> <!-- Banner -->
+	<rect width="500px" height="50px" fill="red" />
+	<text x="250" y="40" font-size="40" text-anchor="middle" fill="green">Nuclear Reactor</text>
+</svg>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="blue" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="yellow">Pump speed</text>
+</svg>
+<input id="fanspeed" type="range" value="0" onchange="fanspeedUpdate()" />
+<a id="fanspeedIndicator">Pump speed:0</a>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="yellow" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="blue">Enable/disable</text>	
+</svg>
+<button id="on" onclick="on()" >ON</button>
+<button id="off" onclick="off(false)">OFF</button>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="green" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="red">Temperature in K°</text>
+</svg>
+<meter id="temp" value="0" min="0" max="100" low="33" high="66" optimum="1"></meter>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="red" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="green">Battery</text>
+</svg>
+<meter id="bat" value="0" min="0" max="100"></meter>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="blue" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="yellow">Computer login</text>
+</svg>
+<input id="password-form" type="password"></input><button id="password-form-submit" onclick="o(validate())" style="background-color:yellow;color:blue;">Login</button>
+<div id="computer-controls" style="background-color:yellow;"></div>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="green" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="red">Fail safe</text> 
+</svg>
+<button id="fs.on" style="background-color:green;" onclick="failsafe(true)">ON</button>
+<button id="fs.off" style="background-color:red;" onclick="failsafe(false)">OFF</button>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="red" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="green">Chance of meltdown</text>
+</svg>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="yellow" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="blue" id="chance">1 in 10</text>
+</svg>
+<button id="buy-blowc" style="background-color:red;color:green;" onclick="if(bat>10){blowc+=2;bat-=10}">Upgrade (for 10% of battery)</button>
+<a>(chance rolled when control rods moved)</a>
+<br>
+<svg height="100" width="200">
+	<rect height="100px" width="200px" fill="blue" />
+	<text x="100" y="18" font-size="20" text-anchor="middle" fill="yellow">Control rods</text>
+</svg>
+<svg height="100" width="200">
+	<rect height="100px" width="200px" fill="blue" />
+	<rect height="100px" width="25px" fill="yellow" />
+	<rect id="control-rods-up-down" height="25px" width="150px" fill="yellow" y="75" />
+	<rect id="cr1" x="35" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<rect id="cr2" x="55" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<rect id="cr3" x="75" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<rect id="cr4" x="95" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<rect id="cr5" x="115" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<rect id="cr6" x="135" height="80px" width="10px" fill="yellow" style="visibility:hidden;" />
+	<text x="175" y="18" font-size="15" text-anchor="middle" fill="yellow">UP</text>
+	<text x="175" y="95" font-size="15" text-anchor="middle" fill="yelloW">DOWN</text>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="yellow" />
+`	<text x="100" y="18" font-size="18" text-anchor="middle" fill="blue">Reactor efficiency</text>
+</svg>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="blue" />
+	<text id="efficiency" x="100" y="18" font-size="18" text-anchor="middle" fill="yellow">0.2</text>
+</svg>
+<button id="buy-speed" style="background-color:red;color:green;" onclick="if(bat>10){speed+=0.05;bat-=10}">Upgrade (for 10% of battery)</button>
+<br>
+<svg height="25" width="200">
+	<rect height="25px" width="200px" fill="green" />
+	<text x="100" y="18" font-size="18" text-anchor="middle" fill="red">Auto-cycle</text>
+</svg>
+<button id="ac-on" onclick="acc(true)">ON</button>
+<button id="ac-off" onclick="acc(false)">OFF</button>
+<a>Beware! Moves control rods very frequently, which could cause meltdown very quickly.</a>
+<br>
+<svg height="100" width="200">
+	<rect height="100px" width="200px" fill="red" />
+	<text x="100" y="17" font-size="18" text-anchor="middle" fill="green">Souvenirs</text>
+	<polygon points="18,18 40,18 40,40 18,40 18,18" style="fill:gray;stroke:blue;visibility:hidden;" id="c-p" />       //Chernobyl
+	<text x="29" y="35" font-size="18" text-anchor="middle" fill="yellow" style="visibility:hidden;" id="c-t">C</text>//Chernobyl
+	<polygon points="40,18 62,18 62,40 40,40 40,18" style="fill:yellow;stroke:blue;visibility:hidden;" id="m-p" />    //Mayak
+	<text x="51" y="35" font-size="18" text-anchor="middle" fill="green" style="visibility:hidden;" id="m-t">M</text> //Mayak
+	<polygon points="62,18 84,18 84,40 62,40 62,18" style="fill:blue;stroke:yellow;visibility:hidden;" id="s-p" />    //SL-1
+	<text x="73" y="35" font-size="18" text-anchor="middle" fill="red" style="visibility:hidden;" id="s-t">S</text>   //SL-1
+</svg>
+<a>Each cost 100% of battery: </a>
+<button id="buy-c" onclick="if(bat>99){document.getElementById('c-p').style.visibility='visible';document.getElementById('c-t').style='visibility:visible;';bat-=99;document.getElementById('buy-c').remove()}" style="background-color:yellow;color:blue;">Chernobyl</button>
+
+<button id="buy-m" onclick="if(bat>99){document.getElementById('m-p').style.visibility='visible';document.getElementById('m-t').style='visibility:visible;';bat-=99;document.getElementById('buy-m').remove()}" style="background-color:yellow;color:blue;">Mayak</button>
+
+<button id="buy-s" onclick="if(bat>99){document.getElementById('s-p').style.visibility='visible';document.getElementById('s-t').style='visibility:visible;';bat-=99;document.getElementById('buy-s').remove()}" style="background-color:yellow;color:blue;">SL-1</button>
+</div>
+</body>
