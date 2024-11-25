@@ -55,11 +55,33 @@ class board{
 		}
 		canvas.closePath()
 		//Special:
-		canvas.beginPath()
+		canvas.beginPath()//Trampoline
 		canvas.fillStyle="green"
 		for (let x=0;x<this.w;x++){
 			for (let y=0;y<this.h;y++){
 				if(this.b[x][y]==2){
+					canvas.rect(x*10,y*10,10,10)
+					canvas.fill()
+				}
+			}
+		}
+		canvas.closePath()
+		canvas.beginPath()//Flip flop A
+		canvas.fillStyle="blue"
+		for (let x=0;x<this.w;x++){
+			for (let y=0;y<this.h;y++){
+				if(this.b[x][y]==3){
+					canvas.rect(x*10,y*10,10,10)
+					canvas.fill()
+				}
+			}
+		}
+		canvas.closePath()
+		canvas.beginPath()//Flip flop B
+		canvas.fillStyle="yellow"
+		for (let x=0;x<this.w;x++){
+			for (let y=0;y<this.h;y++){
+				if(this.b[x][y]==4){
 					canvas.rect(x*10,y*10,10,10)
 					canvas.fill()
 				}
@@ -90,10 +112,26 @@ class board{
 		this.ant=new ant(x,y)
 	}
 	antTick(){
-		try{
+		try{ //Trampoline
 			let q=this.b[this.ant.x][this.ant.y-2]
 			if (this.b[this.ant.x][this.ant.y+1]==2&&q==0){
 				this.ant.y-=2
+				return
+			}
+		}catch{}
+		try{ //Flip flop A
+			let q=this.b[this.ant.x][this.ant.y-2]
+			if (this.b[this.ant.x][this.ant.y+1]==3&&q==0){
+				this.b[this.ant.x][this.ant.y+1]=4
+				this.ant.y-=2
+				return
+			}
+		}catch{}
+		try{ //Flip flop B
+			let q=this.b[this.ant.x][this.ant.y-2]
+			if (this.b[this.ant.x][this.ant.y+1]==4&&q==0){
+				this.b[this.ant.x][this.ant.y+1]=3
+				this.ant.y-=4
 				return
 			}
 		}catch{}
@@ -211,6 +249,12 @@ document.addEventListener('keydown',(e)=>{
 	if(e.code=="KeyE"){
 		x.b[x.cursor[0]][x.cursor[1]]=2
 	}
+	if(e.code=="KeyQ"){
+		x.b[x.cursor[0][x.cursor[1]]=3
+	}
+	if(e.code=="KeyW"){
+		x.b[x.cursor[0][x.cursor[1]]=4
+	}
 })
 </script>
 <br>
@@ -223,5 +267,9 @@ document.addEventListener('keydown',(e)=>{
 <button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,false,1);x.placeAnt();x.foo()">Generate! (Solid)</button>
 <button onclick="x.placeAnt();x.AHL=false">Restart ant</button><button onclick="x.ant=undefined">Kill ant</button>
 <br>
-<a>Watch Ant, the ant, try to solve an impossible endless maze!<br>If lost, ant will jump up and down, run around, or stay still.<br>Edit the map with arrow keys (to move selector) and space (to toggle selected tile) and E (to place trampoline)</a>
+<a>Watch Ant, the ant, try to solve an impossible endless maze!<br>
+If lost, ant will jump up and down, run around, or stay still.<br>
+Edit the map with arrow keys (to move selector) and space (to toggle selected tile) and E (to place trampoline)<br>
+You can also hit Q or W to make a flip flop, which will alternate from bouncing Ant 4 tiles up and bouncing Ant 2 tiles up.<br>
+Q will create a flip flop in the A state (bounce up 2 tiles), and W will create a flip flop in the B state (bounce up 4 tiles).</a>
 </body>
