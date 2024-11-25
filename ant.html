@@ -57,7 +57,7 @@ class board{
 		//Cursor:
 		canvas.beginPath()
 		canvas.rect(this.cursor[0]*10,this.cursor[1]*10,10,10)
-		canvas.strokeStyle="yellow"
+		canvas.strokeStyle="blue"
 		canvas.stroke()
 		canvas.closePath()
 	}
@@ -168,6 +168,13 @@ document.addEventListener('keydown',(e)=>{
 	}
 	if(e.code=="ArrowRight"&&!(x.cursor[0]==x.w)){
 		x.cursor[0]+=1
+	}
+	if(e.code=="Space"){
+		if(x.b[x.cursor[0]][x.cursor[1]]==1){
+			x.b[x.cursor[0]][x.cursor[1]]=0
+		} else {
+			x.b[x.cursor[0]][x.cursor[1]]=1
+		}
 	}
 })
 </script>
