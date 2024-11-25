@@ -128,7 +128,7 @@ class board{
 			}
 		}catch{}
 		try{ //Flip flop B
-			let q=this.b[this.ant.x][this.ant.y-2]
+			let q=this.b[this.ant.x][this.ant.y-4]
 			if (this.b[this.ant.x][this.ant.y+1]==4&&q==0){
 				this.b[this.ant.x][this.ant.y+1]=3
 				this.ant.y-=4
