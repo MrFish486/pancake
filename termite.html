@@ -1,0 +1,89 @@
+<canvas id="game" width="100px" height="100px" />
+<script>
+class term{
+        constructor(x,y,heading){
+                this.x=x
+                this.y=y
+                this.h=h
+        }
+}
+class board{
+        constructor(width,height){
+                this.w=width
+                this.h=height
+                this.terms=[]
+                this.b=[]
+                for(let x=0;x<width;x++){
+                        this.b.push([])
+                        for(let y=0;y<height;y++){
+                                this.b[x].push(0)
+                        }
+                }
+        }
+        tick(){ //Tick will do rendering and termite moving, unlike ant.html
+                this.terms.forEach(function(v,i){
+                        if(b[v.x][v.y]==0){ //Forward
+                                if(v.h=="u"&&!(v.y==0)){
+                                        v.y-=1
+                                }
+                                if(v.h=="d"&&!(v.y==this.h-1)){
+                                        v.y+=1
+                                }
+                                if(v.h=="l"&&!(v.x==0)){
+                                        v.x-=1
+                                }
+                                if(v.h=="r"&&!(v.x==this.w-1)){
+                                        v.x+=1
+                                }
+                        } else if(b[v.x][v.y]==1){ //Left
+                                if(v.h=="u"){v.h="l"}
+                                if(v.h=="d"){v.h="r"}
+                                if(v.h=="l"){v.h="d"}
+                                if(v.h=="r"){v.h="u"}
+                        } else if(b[v.x][v.y]==2){ //Right
+                                if(v.h=="u"){v.h="r"}
+                                if(v.h=="d"){v.h="l"}
+                                if(v.h=="l"){v.h="u"}
+                                if(v.h=="r"){v.h="d"}
+                        }
+                })
+                //Now for rendering!
+                //Rendering map:
+                c=document.getElementById("canvas")
+                canvas=c.getContext("2d")
+                canvas.clearRect(0,0,this.w,this.h)
+                canvas.beginStroke()
+                for(let x=0;x<this.w;x++){
+                        for(let y=0;y<this.h;y++){
+                                if(this.b[x][y]==1){
+                                        canvas.rect(x*10,y*10,10,10)
+                                }
+                        }
+                }
+                canvas.fillStyle="red"
+                canvas.fill()
+                canvas.closeStroke()
+                canvas.beginStroke()
+                for(let x=0;x<this.w;x++){
+                        for(let y=0;y<this.h;y++){
+                                if(this.b[x][y]==2){
+                                        canvas.rect(x*10,y*10,10,10)
+                                }
+                        }
+                }
+                canvas.fillStyle="green"
+                canvas.fill()
+                canvas.closeStroke()
+                // Rendering termites:
+                this.terms.forEach(function(v,i){
+                        canvas.rect(v.x*10,v.y*10,10,10)
+                })
+                canvas.strokeStyle="blue"
+                canvas.stroke()
+                canvas.closeStroke()
+        }
+}
+x=new board(10,10)
+x.terms.push(10,10,"u")
+setInterval(function(){x.tick()},10)
+</script>
