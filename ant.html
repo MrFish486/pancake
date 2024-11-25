@@ -12,7 +12,7 @@ class ant{
 	}
 }
 class board{
-	constructor(h,w,random){
+	constructor(h,w,random,fill){
 		this.ant=undefined
 		this.h=h
 		this.w=w
@@ -20,11 +20,19 @@ class board{
 		this.b=[]
 		this.AHL=false //Ant Heading Left; if AHL, ant goes <, else ant goes >
 		this.cursor=[0,0]
+		this.fill=fill
 		if (random){
 			for (let i=0;i<w;i++){
 				this.b.push([])
 				for (let o=0;o<h;o++){
 					this.b[i].push(Math.round(Math.random()))
+				}
+			}
+		} else {
+			for (let i=0;i<w;i++){
+				this.b.push([])
+				for (let o=0;o<h;o++){
+					this.b[i].push(fill)
 				}
 			}
 		}
@@ -183,8 +191,9 @@ document.addEventListener('keydown',(e)=>{
 <br>
 <a>W:</a><input type="range" min="1" max="500" id="w" value="50" />
 <br>
-<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,true);x.placeAnt();x.foo()">Generate!</button>
-<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,false);x.placeAnt();x.foo()">Generate! (Blank)</button>
+<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,true,0);x.placeAnt();x.foo()">Generate!</button>
+<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,false,0);x.placeAnt();x.foo()">Generate! (Blank)</button>
+<button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,false,1);x.placeAnt();x.foo()">Generate! (Solid)</button>
 <button onclick="x.placeAnt();x.AHL=false">Restart ant</button><button onclick="x.ant=undefined">Kill ant</button>
 <br>
 <a>Watch Ant, the ant, try to solve an impossible endless maze!<br>If lost, ant will jump up and down, run around, or stay still.</a>
