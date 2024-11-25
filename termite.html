@@ -52,7 +52,7 @@ class board{
                 //Rendering map:
                 let c=document.getElementById("game")
                 let canvas=c.getContext("2d")
-                canvas.clearRect(0,0,this.w,this.h)
+                canvas.clearRect(0,0,this.w*10,this.h*10)
                 canvas.beginPath()
                 for(let x=0;x<this.w;x++){
                         for(let y=0;y<this.h;y++){
