@@ -258,9 +258,9 @@ document.addEventListener('keydown',(e)=>{
 })
 </script>
 <br>
-<a>H:</a><input type="range" min="1" max="500" id="h" value="50" />
+<a>H:</a><input type="range" min="1" max="50" id="h" value="10" />
 <br>
-<a>W:</a><input type="range" min="1" max="500" id="w" value="50" />
+<a>W:</a><input type="range" min="1" max="50" id="w" value="10" />
 <br>
 <button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,true,0);x.placeAnt();x.foo()">Generate!</button>
 <button onclick="document.getElementById('game').width=(document.getElementById('w').value*10);document.getElementById('game').height=(document.getElementById('h').value*10);x=new board(document.getElementById('h').value,document.getElementById('w').value,false,0);x.placeAnt();x.foo()">Generate! (Blank)</button>
