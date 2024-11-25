@@ -21,8 +21,9 @@ class board{
                 }
         }
         tick(){ //Tick will do rendering and termite moving, unlike ant.html
-                this.terms.forEach(function(v,i){
-                        if(x.b[v.x][v.y]==0){ //Forward
+                for(let t=0;v<this.terms.length;v++){
+                        let v=this.terms[t]
+                        if(this.b[v.x][v.y]==0){ //Forward
                                 if(v.h=="u"&&!(v.y==0)){
                                         v.y-=1
                                 }
@@ -35,18 +36,18 @@ class board{
                                 if(v.h=="r"&&!(v.x==this.w-1)){
                                         v.x+=1
                                 }
-                        } else if(x.b[v.x][v.y]==1){ //Left
+                        } else if(this.b[v.x][v.y]==1){ //Left
                                 if(v.h=="u"){v.h="l"}
                                 if(v.h=="d"){v.h="r"}
                                 if(v.h=="l"){v.h="d"}
                                 if(v.h=="r"){v.h="u"}
-                        } else if(x.b[v.x][v.y]==2){ //Right
+                        } else if(this.b[v.x][v.y]==2){ //Right
                                 if(v.h=="u"){v.h="r"}
                                 if(v.h=="d"){v.h="l"}
                                 if(v.h=="l"){v.h="u"}
                                 if(v.h=="r"){v.h="d"}
                         }
-                })
+                }
                 //Now for rendering!
                 //Rendering map:
                 c=document.getElementById("canvas")
