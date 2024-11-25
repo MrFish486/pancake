@@ -66,7 +66,11 @@ class board{
 		//Cursor:
 		canvas.beginPath()
 		canvas.rect(this.cursor[0]*10,this.cursor[1]*10,10,10)
-		canvas.strokeStyle="red"
+		if(this.b[this.cursor[0]][this.cursor[1]]==0){
+			canvas.strokeStyle="red"
+		} else {
+			canvas.strokeStyle="green"
+		}
 		canvas.stroke()
 		canvas.closePath()
 	}
