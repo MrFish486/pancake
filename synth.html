@@ -13,7 +13,11 @@ class tape{
                 this.l=[]
                 this.pos=0
                 for(let i=0;i<len;i++){
-                        this.l.push(0)
+                        if(rand){
+                                this.l.push(Math.round(Math.random()))
+                        } else {
+                                this.l.push(0)
+                        }
                 }
                 document.getElementById("game").width=(len*10)
         }
@@ -32,7 +36,7 @@ class tape{
                 1's rule write (can be left empty for no rule write)
                 */
                 if(this.l[this.pos]==0){//0
-                        o.frequency=rules[0]
+                        o.frequency=this.rules[0]
                         o.start()
                         setTimeout(o.stop,100)
                         this.l[this.pos]=this.rules[1]
@@ -70,6 +74,8 @@ class tape{
                 c.closePath()
         }
 }
+x=new tape(10,[100,1,1,[],200,0,1],false)
+
 </script>
 <h1>Hello, welcome to a very primitive synth!</h1>
 <br>
