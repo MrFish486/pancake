@@ -50,8 +50,8 @@ class board{
                 }
                 //Now for rendering!
                 //Rendering map:
-                c=document.getElementById("canvas")
-                canvas=c.getContext("2d")
+                let c=document.getElementById("canvas")
+                let canvas=c.getContext("2d")
                 canvas.clearRect(0,0,this.w,this.h)
                 canvas.beginStroke()
                 for(let x=0;x<this.w;x++){
