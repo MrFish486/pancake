@@ -3,12 +3,14 @@
 <script>
 c=new (window.AudioContext||window.webkitAudioContext())()
 function dl(){
+        c=new (window.AudioContext||window.webkitAudioContext())()
         l=c.createOscillator()
         l.type="square"
         l.frequency=100
         l.connect(c.destination)
 }
 function dh(){
+        c=new (window.AudioContext||window.webkitAudioContext())()
         h=c.createOscillator()
         h.type="square"
         h.frequency=200
