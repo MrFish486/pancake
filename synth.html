@@ -1,11 +1,77 @@
 <body>
+<canvas id="game" width="0px" height="10px" style="border:2px solid black;" />
 <script>
 c=new (window.AudioContext||window.webkitAudioContext())()
-o=c.createOscillator();
+o=c.createOscillator()
 o.type="square"
 o.frequency=440
 o.connect(c.destination)
+class tape{
+        constructor(len,rules,rand){
+                this.rules=rules
+                this.cursor=0
+                this.l=[]
+                this.pos=0
+                for(let i=0;i<len;i++){
+                        this.l.push(0)
+                }
+                document.getElementById("game").width=(len*10)
+        }
+        tick(){
+                /*
+                Rules format:
+                First four are for 0, second four are for 1, 
+                Order:
+                0's tone (in hz)
+                0's write (1 or 0)
+                0's jump (no limit)
+                0's rule write (can be left empty for no rule write)
+                1's tone (in hz)
+                1's write (1 or 0)
+                1's jump (no limit)
+                1's rule write (can be left empty for no rule write)
+                */
+                if(this.l[this.pos]==0){//0
+                        o.frequency=rules[0]
+                        o.start()
+                        setTimeout(o.stop,100)
+                        this.l[this.pos]=this.rules[1]
+                        if(this.pos+this.rules[2]<this.l.length){this.pos+=this.rules[2]}
+                        if(this.rules[3].length==6){this.rules=this.rules[3]}
+                } else if(this.l[this.pos]==1){//1
+                        o.frequency=rules[4]
+                        o.start()
+                        setTimeout(o.stop,100)
+                        this.l[this.pos]=this.rules[5]
+                        if(this.pos+this.rules[6]<this.l.length){this.pos+=this.rules[6]}
+                        if(this.rules[7].length==6){this.rules=this.rules[6]}
+                }
+                //Render:
+                c=document.getElementById("game").getContext("2d")
+                c.clearRect(0,0,this.l.length*10,10)
+                c.beginPath()
+                c.fillStyle="black"
+                for(let i=0;i<this.l.length;i++){
+                        if(i==1){
+                                c.rect(i*10,0,10,10)
+                        }
+                }
+                c.fill()
+                c.closePath()
+                c.beginPath()
+                c.strokeStyle="red"
+                c.rect(this.cursor*10,0,10,10)
+                c.stroke()
+                c.closePath()
+                c.beginPath()
+                c.strokeStyle="green"
+                c.rect(this.pos*10,0,10,10)
+                c.stroke()
+                c.closePath()
+        }
+}
 </script>
 <h1>Hello, welcome to a very primitive synth!</h1>
-<button id="trigger" onclick="o.start()" onmouseup="o.stop">beep</button>
+<br>
+<!--        <button id="trigger" onclick="o.start()" onmouseup="o.stop()">beep</button>        -->
 </body>
