@@ -7,11 +7,13 @@ function dl(){
         l.type="square"
         l.frequency=100
         l.connect(c.destination)
+}
 function dh(){
         h=c.createOscillator()
         h.type="square"
         h.frequency=200
         h.connect(c.destination)
+}
 class tape{
         constructor(len,rules,rand){
                 this.rules=rules
@@ -82,7 +84,7 @@ class tape{
                 c.closePath()
         }
 }
-x=new tape(10,[100,1,1,[],200,0,1],false)
+x=new tape(10,[100,1,1,[],200,0,1,[]],false)
 
 </script>
 <h1>Hello, welcome to a very primitive synth!</h1>
