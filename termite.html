@@ -53,7 +53,7 @@ class board{
                 let c=document.getElementById("game")
                 let canvas=c.getContext("2d")
                 canvas.clearRect(0,0,this.w,this.h)
-                canvas.beginStroke()
+                canvas.beginPath()
                 for(let x=0;x<this.w;x++){
                         for(let y=0;y<this.h;y++){
                                 if(this.b[x][y]==1){
@@ -63,8 +63,8 @@ class board{
                 }
                 canvas.fillStyle="red"
                 canvas.fill()
-                canvas.closeStroke()
-                canvas.beginStroke()
+                canvas.closePath()
+                canvas.beginPath()
                 for(let x=0;x<this.w;x++){
                         for(let y=0;y<this.h;y++){
                                 if(this.b[x][y]==2){
@@ -74,14 +74,14 @@ class board{
                 }
                 canvas.fillStyle="green"
                 canvas.fill()
-                canvas.closeStroke()
+                canvas.closePath()
                 // Rendering termites:
                 this.terms.forEach(function(v,i){
                         canvas.rect(v.x*10,v.y*10,10,10)
                 })
                 canvas.strokeStyle="blue"
                 canvas.stroke()
-                canvas.closeStroke()
+                canvas.closePath()
         }
 }
 x=new board(10,10)
