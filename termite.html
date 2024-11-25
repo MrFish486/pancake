@@ -55,6 +55,7 @@ class board{
                 let canvas=c.getContext("2d")
                 canvas.clearRect(0,0,this.w*10,this.h*10)
                 canvas.beginPath()
+		canvas.strokeStyle="black"
                 for(let x=0;x<this.w;x++){
                         for(let y=0;y<this.h;y++){
                                 if(this.b[x][y]==1){
@@ -66,6 +67,7 @@ class board{
                 canvas.fill()
                 canvas.closePath()
                 canvas.beginPath()
+		canvas.strokeStyle="black"
                 for(let x=0;x<this.w;x++){
                         for(let y=0;y<this.h;y++){
                                 if(this.b[x][y]==2){
