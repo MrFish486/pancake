@@ -157,17 +157,17 @@ x.placeAnt()
 setInterval(function(){x.antTick();x.foo()},100)
 //Editing:
 document.addEventListener('keydown',(e)=>{
-	if(e.code=="ArrowUp"&&!(x.cursor[0]==0)){
-		x.cursor[0]-=1
-	}
-	if(e.code=="ArrowDown"&&!(x.cursor[0]==x.h)){
-		x.cursor[0]+=1
-	}
-	if(e.code=="ArrowLeft"&&!(x.cursor[1]==0)){
+	if(e.code=="ArrowUp"&&!(x.cursor[1]==0)){
 		x.cursor[1]-=1
 	}
-	if(e.code=="ArrowRight"&&!(x.cursor[1]==x.w)){
+	if(e.code=="ArrowDown"&&!(x.cursor[1]==x.h)){
 		x.cursor[1]+=1
+	}
+	if(e.code=="ArrowLeft"&&!(x.cursor[0]==0)){
+		x.cursor[0]-=1
+	}
+	if(e.code=="ArrowRight"&&!(x.cursor[0]==x.w)){
+		x.cursor[0]+=1
 	}
 })
 </script>
