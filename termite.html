@@ -95,7 +95,7 @@ class board{
 }
 x=new board(10,10)
 x.terms.push(new term(9,9,"u"))
-setInterval(function(){x.tick()},5)
+setInterval(function(){x.tick()},50)
 //Editing
 document.addEventListener('keydown',(e)=>{
 	if(e.code=="ArrowUp"&&!(x.cursor[1]==0)){
