@@ -13,6 +13,7 @@ class board{
                 this.h=height
                 this.terms=[]
                 this.b=[]
+                this.cursor=[0,0]
                 for(let x=0;x<width;x++){
                         this.b.push([])
                         for(let y=0;y<height;y++){
@@ -87,4 +88,28 @@ class board{
 x=new board(10,10)
 x.terms.push(new term(9,9,"u"))
 setInterval(function(){x.tick()},500)
+//Editing
+document.addEventListener('keydown',(e)=>{
+	if(e.code=="ArrowUp"&&!(x.cursor[1]==0)){
+		x.cursor[1]-=1
+	}
+	if(e.code=="ArrowDown"&&!(x.cursor[1]==x.h-1)){
+		x.cursor[1]+=1
+	}
+	if(e.code=="ArrowLeft"&&!(x.cursor[0]==0)){
+		x.cursor[0]-=1
+	}
+	if(e.code=="ArrowRight"&&!(x.cursor[0]==x.w-1)){
+		x.cursor[0]+=1
+	}
+	if(e.code=="KeyE"){
+		x.b[x.cursor[0]][x.cursor[1]]=0
+	}
+	if(e.code=="KeyQ"){
+		x.b[x.cursor[0]][x.cursor[1]]=1
+	}
+	if(e.code=="KeyW"){
+		x.b[x.cursor[0]][x.cursor[1]]=2
+	}
+})    
 </script>
