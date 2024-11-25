@@ -42,14 +42,14 @@ class tape{
                 if(this.l[this.pos]==0){//0
                         //o.frequency=this.rules[0]
                         l.start()
-                        setTimeout(l.stop,100)
+                        setTimeout(function(){l.stop()},100)
                         this.l[this.pos]=this.rules[1]
                         if(this.pos+this.rules[2]<this.l.length){this.pos+=this.rules[2]}
                         if(this.rules[3].length==6){this.rules=this.rules[3]}
                 } else if(this.l[this.pos]==1){//1
                         //o.frequency=rules[4]
                         h.start()
-                        setTimeout(h.stop,100)
+                        setTimeout(function(){h.stop()},100)
                         this.l[this.pos]=this.rules[5]
                         if(this.pos+this.rules[6]<this.l.length){this.pos+=this.rules[6]}
                         if(this.rules[7].length==6){this.rules=this.rules[6]}
