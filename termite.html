@@ -38,15 +38,15 @@ class board{
                                         v.x+=1
                                 }
                         } else if(this.b[v.x][v.y]==1){ //Left
-                                if(v.h=="u"){v.h="l"}
-                                if(v.h=="d"){v.h="r"}
-                                if(v.h=="l"){v.h="d"}
-                                if(v.h=="r"){v.h="u"}
+                                if(v.h=="u"){v.h="l";if(!(v.y==0)){v.y-=1}}
+                                if(v.h=="d"){v.h="r";if(!(v.y==this.h-1)){v.y+=1}}
+                                if(v.h=="l"){v.h="d";if(!(v.x==0)){v.x-=1}}
+                                if(v.h=="r"){v.h="u";if(!(v.x==this.w-1)){v.x+=1}}
                         } else if(this.b[v.x][v.y]==2){ //Right
-                                if(v.h=="u"){v.h="r"}
-                                if(v.h=="d"){v.h="l"}
-                                if(v.h=="l"){v.h="u"}
-                                if(v.h=="r"){v.h="d"}
+				if(v.h=="u"){v.h="r";if(!(v.y==0)){v.y-=1}}
+                                if(v.h=="d"){v.h="l";if(!(v.y==this.h-1)){v.y+=1}}
+                                if(v.h=="l"){v.h="u";if(!(v.x==0)){v.x-=1}}
+                                if(v.h=="r"){v.h="d";if(!(v.x==this.w-1)){v.x+=1}}
                         }
                 }
                 //Now for rendering!
@@ -83,7 +83,13 @@ class board{
                 canvas.strokeStyle="red"
                 canvas.stroke()
                 canvas.closePath()
-        }
+		// Rendering cursor:
+		canvas.beginPath()
+		canvas.rect(this.cursor[0]]*10,[this.cursor[1]]*10,10,10)
+		canvas.strokeStyle="black"
+		canvas.stroke()
+		canvas.closePath()
+	}
 }
 x=new board(10,10)
 x.terms.push(new term(9,9,"u"))
