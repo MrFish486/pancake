@@ -2,14 +2,16 @@
 <canvas id="game" width="0px" height="10px" style="border:2px solid black;"></canvas>
 <script>
 c=new (window.AudioContext||window.webkitAudioContext())()
-l=c.createOscillator()
-l.type="square"
-l.frequency=100
-l.connect(c.destination)
-h=c.createOscillator()
-h.type="square"
-h.frequency=200
-h.connect(c.destination)
+function dl(){
+        l=c.createOscillator()
+        l.type="square"
+        l.frequency=100
+        l.connect(c.destination)
+function dh(){
+        h=c.createOscillator()
+        h.type="square"
+        h.frequency=200
+        h.connect(c.destination)
 class tape{
         constructor(len,rules,rand){
                 this.rules=rules
@@ -41,6 +43,7 @@ class tape{
                 */
                 if(this.l[this.pos]==0){//0
                         //o.frequency=this.rules[0]
+                        dl()
                         l.start()
                         setTimeout(function(){l.stop()},100)
                         this.l[this.pos]=this.rules[1]
@@ -48,6 +51,7 @@ class tape{
                         if(this.rules[3].length==6){this.rules=this.rules[3]}
                 } else if(this.l[this.pos]==1){//1
                         //o.frequency=rules[4]
+                        dh()
                         h.start()
                         setTimeout(function(){h.stop()},100)
                         this.l[this.pos]=this.rules[5]
