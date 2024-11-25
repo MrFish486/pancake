@@ -19,6 +19,7 @@ class board{
 		this.random=random
 		this.b=[]
 		this.AHL=false //Ant Heading Left; if AHL, ant goes <, else ant goes >
+		this.cursor=[0,0]
 		if (random){
 			for (let i=0;i<w;i++){
 				this.b.push([])
@@ -53,7 +54,12 @@ class board{
 			canvas.fill()
 		}
 		canvas.closePath()
-		
+		//Cursor:
+		canvas.beginPath()
+		canvas.rect(this.cursor[0]*10,this.cursor[1]*10,10,10)
+		canvas.strokeStyle="red"
+		canvas.stroke()
+		canvas.closePath()
 	}
 	addAnt(x,y){
 		this.ant=new ant(x,y)
@@ -149,6 +155,21 @@ x=new board(50,50,true)
 x.foo()
 x.placeAnt()
 setInterval(function(){x.antTick();x.foo()},100)
+//Editing:
+document.addEventListener('keydown',(e)=>{
+	if(e.code=="ArrowUp"&&!(x.cursor[0]==0)){
+		x.cursor[0]-=1
+	}
+	if(e.code=="ArrowDown"&&!(x.cursor[0]==x.h){
+		x.cursor[0]+=1
+	}
+	if(e.code=="ArrowLeft"&&!(x.cursor[1]==0)){
+		x.cursor[1]-=1
+	}
+	if(e.code=="ArrowRight"&&!(x.cursor[1]==x.w){
+		x.cursor[1]+=1
+	}
+})
 </script>
 <br>
 <a>H:</a><input type="range" min="1" max="500" id="h" value="50" />
