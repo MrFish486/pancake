@@ -30,7 +30,7 @@ class tape{
                 */
                 if(this.l[this.pos]==0){//0
                         this.l[this.pos]=this.rules[0]
-                        if(this.pos+this.rules[1]<this.l.length&&this.pos+this.rules[1]>0){this.pos+=this.rules[1]}
+                        if(this.pos+this.rules[1]<this.l.length&&this.pos+this.rules[1]>-1){this.pos+=this.rules[1]}
                         if(this.rules[2].length==6){this.rules=this.rules[2]}
                 } else if(this.l[this.pos]==1){//1
                         this.l[this.pos]=this.rules[3]
