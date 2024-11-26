@@ -2,7 +2,7 @@
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
 </head>
-<body id="body">
+<body id="body" onload="document.getElementById('time').innerHTML=Math.round(new Date()/1000)-document.cookie['a'];document.cookie={'a':Math.round(new Date()/1000)}">
 <style>
 * {
     text-align:center;
@@ -53,5 +53,6 @@ p {
 <p>...Or, look at some other stuff below.</p>
 <!-- <a>Change the background color here: </a><input style="background-color:#daa06d;" id="background-color" type="color" value="#daa06d" onchange="document.getElementById('body').style='padding:10px;border:2px solid #2a263b;background-color:'+document.getElementById('background-color').value+';';document.getElementById('background-color').style='background-color:'+document.getElementById('background-color').value+';'" /> -->
 <h2>Nothing here right now :(</h2>
-<a style="vertical-align:bottom;">Feedback? Email <a href="mailto:grimreaper86668@gmail.com">grimreaper86668@gmail.com</a>!</a>
+<a>Feedback? Email <a href="mailto:grimreaper86668@gmail.com">grimreaper86668@gmail.com</a>!</a>
+<a id="time"></a>
 </body>
