@@ -2,7 +2,7 @@
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
 </head>
-<body id="body" onload="document.getElementById('time').innerHTML=Math.round(new Date()/1000)-parseInt(document.cookie);document.cookie=Math.round(new Date()/1000);window.onbeforeunload=function(){document.cookie=Math.round(new Date()/1000)}">
+<body id="body" onload="document.getElementById('time').innerHTML=Math.floor((Math.round(new Date()/1000)-parseInt(document.cookie))/60);document.cookie=Math.round(new Date()/1000);window.onbeforeunload=function(){document.cookie=Math.round(new Date()/1000)}">
 <style>
 * {
     text-align:center;
@@ -53,7 +53,7 @@ p {
 <p>...Or, look at some other stuff below.</p>
 <!-- <a>Change the background color here: </a><input style="background-color:#daa06d;" id="background-color" type="color" value="#daa06d" onchange="document.getElementById('body').style='padding:10px;border:2px solid #2a263b;background-color:'+document.getElementById('background-color').value+';';document.getElementById('background-color').style='background-color:'+document.getElementById('background-color').value+';'" /> -->
 <br><br>
-<a> Seconds since last visit:</a><a id='time'></a>
+<a> Minutes since last visit:</a><a id='time'></a>
 <br><br>
 <a>Feedback? Email <a href="mailto:grimreaper86668@gmail.com">grimreaper86668@gmail.com</a>!</a>
 </body>
