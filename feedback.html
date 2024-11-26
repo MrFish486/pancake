@@ -27,7 +27,7 @@
         feedback: r
     };
 
-    firebase.database().ref('subscription-entries').push().set(emailObject)
+    firebase.database().ref('feedback').push().set(emailObject)
         .then(function(snapshot) {
             document.getElementById('done').innerHTML='Success!'
         }, function(error) {
