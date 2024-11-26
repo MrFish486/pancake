@@ -1,21 +1,6 @@
 <body>
 <canvas id="game" width="0px" height="10px" style="border:2px solid black;"></canvas>
 <script>
-c=new (window.AudioContext||window.webkitAudioContext())()
-function dl(){
-        c=new (window.AudioContext||window.webkitAudioContext())()
-        l=c.createOscillator()
-        l.type="square"
-        l.frequency=100
-        l.connect(c.destination)
-}
-function dh(){
-        c=new (window.AudioContext||window.webkitAudioContext())()
-        h=c.createOscillator()
-        h.type="square"
-        h.frequency=200
-        h.connect(c.destination)
-}
 class tape{
         constructor(len,rules,rand){
                 this.rules=rules
@@ -36,31 +21,21 @@ class tape{
                 Rules format:
                 First four are for 0, second four are for 1, 
                 Order:
-                0's tone (in hz)
                 0's write (1 or 0)
                 0's jump (no limit)
                 0's rule write (can be left empty for no rule write)
-                1's tone (in hz)
                 1's write (1 or 0)
                 1's jump (no limit)
                 1's rule write (can be left empty for no rule write)
                 */
                 if(this.l[this.pos]==0){//0
-                        //o.frequency=this.rules[0]
-                        dl()
-                        l.start()
-                        setTimeout(function(){l.stop()},100)
-                        this.l[this.pos]=this.rules[1]
-                        if(this.pos+this.rules[2]<this.l.length){this.pos+=this.rules[2]}
-                        if(this.rules[3].length==6){this.rules=this.rules[3]}
+                        this.l[this.pos]=this.rules[0]
+                        if(this.pos+this.rules[1]<this.l.length){this.pos+=this.rules[1]}
+                        if(this.rules[2].length==6){this.rules=this.rules[2]}
                 } else if(this.l[this.pos]==1){//1
-                        //o.frequency=rules[4]
-                        dh()
-                        h.start()
-                        setTimeout(function(){h.stop()},100)
-                        this.l[this.pos]=this.rules[5]
-                        if(this.pos+this.rules[6]<this.l.length){this.pos+=this.rules[6]}
-                        if(this.rules[7].length==6){this.rules=this.rules[6]}
+                        this.l[this.pos]=this.rules[3]
+                        if(this.pos+this.rules[4]<this.l.length){this.pos+=this.rules[4]}
+                        if(this.rules[5].length==6){this.rules=this.rules[5]}
                 }
                 //Render:
                 c=document.getElementById("game").getContext("2d")
