@@ -1,0 +1,41 @@
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBhs8mC45b-kJa_trE2GDBhtUSg1nsd590",
+    authDomain: "pancake-4231d.firebaseapp.com",
+    projectId: "pancake-4231d",
+    storageBucket: "pancake-4231d.firebasestorage.app",
+    messagingSenderId: "85461324121",
+    appId: "1:85461324121:web:0771d0f7b5dc705344fc48",
+    measurementId: "G-2Y8LKNG1WD"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  function saveToFirebase(r) {
+    var emailObject = {
+        feedback: r
+    };
+
+    firebase.database().ref('subscription-entries').push().set(emailObject)
+        .then(function(snapshot) {
+            document.getElementById('done').innerHTML='Success!'
+        }, function(error) {
+            console.log('error' + error);
+            document.getElementById('done').innerHTML='Something went wrong... ...Check the console.'
+        });
+  }
+</script>
+<h1>Feedback</h1>
+<h2 id="done"></h2>
+<input id="msg"></input><button onclick="saveToFirebase(document.getElementById('msg'))">Send</button>
+<br>
+<a href="/pancake">Home</a>
