@@ -2,7 +2,7 @@
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
 </head>
-<body id="body" onload="document.getElementById('time').innerHTML=Math.round(new Date()/1000)-document.cookie['a'];document.cookie={'a':Math.round(new Date()/1000)}">
+<body id="body" onload="document.getElementById('time').innerHTML=Math.round(new Date()/1000)-parseInt(document.cookie);document.cookie=Math.round(new Date()/1000)">
 <style>
 * {
     text-align:center;
