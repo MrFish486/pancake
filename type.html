@@ -2,7 +2,10 @@
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
 </head>
-<body onload="document.getElementById('t').style.width=window.innerWidth+'px';document.getElementById('t').style.height=window.innerHeight+'px'">
+<body onload="document.getElementById('t').style.width=*window.innerWidth-10)+'px';document.getElementById('t').style.height=(window.innerHeight-100)+'px'">
+<script>
+document.addEventListener('keydown',(e)=>{if(e.code=="Backspace"){let x=document.getElementById('t').value;x=x.split('');x.pop();console.log(x);document.getElementById('t').value=x.join('')}else{let x=document.getElementById('t').value;x=x.split('');x.push(e.code.split("key")[1]);console.log(x);document.getElementById('t').value=x.join('')}})
+</script>
 <a href="/pancake">Home</a><br>
 <h1>Type all you want!</h1>
 <h2>Hit ALT+Z to enter the text box. Or not.</h2>
