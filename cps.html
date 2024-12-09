@@ -5,7 +5,7 @@
                 over=false
                 st=undefined
                 g=()=>{
-                        if(!go){go=!go;const st=new Date()*1;document.getElementById("c").innerHTML="Click!"}
+                        if(!go){go=!go;var st=new Date()*1;document.getElementById("c").innerHTML="Click!"}
                         if(st<=new Date*1){over=true;return}
                         c++
                 }
