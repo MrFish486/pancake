@@ -9,8 +9,9 @@
                         if(st<=new Date*1){over=true;return}
                         c++
                 }
-                setInterval(()=>{if(st<new Date*1){over=true};if(over){document.getElementById("c").disabled=true;document.getElementById("c").innerHTML="Your score was:"+c/5;clearInterval()}},1)
+                setInterval(()=>{document.getElementById("t").innerHTML="Time left:"+(st-new Date()*1);if(st<new Date*1){over=true};if(over){document.getElementById("c").disabled=true;document.getElementById("c").innerHTML="Your score was:"+c/5;document.getElementById("t").innerHTML="Time's up!";clearInterval()}},1)
         </script>
         <h1>CPS test!</h1>
+        <p id="t">Time left:5</p>
         <button id="c" onclick="g()" width="200px" height="200px">Click to start!</button>
 </body>
