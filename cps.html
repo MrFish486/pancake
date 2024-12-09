@@ -3,9 +3,9 @@
                 go=false
                 c=0
                 over=false
-                st=undefined
+                var st=undefined
                 g=()=>{
-                        if(!go){go=!go;var st=new Date()*1;st+=5000;document.getElementById("c").innerHTML="Click!"}
+                        if(!go){go=!go;st=new Date()*1;st+=5000;document.getElementById("c").innerHTML="Click!"}
                         if(st<=new Date*1){over=true;return}
                         c++
                 }
