@@ -4,12 +4,12 @@
                 c=0
                 over=false
                 g=()=>{
-                        if(!go){go=!go;st=new Date();document.getElementById("c").innerHTML="Click!"}
+                        if(!go){go=!go;const st=new Date()*1;document.getElementById("c").innerHTML="Click!"}
                         if(st<=new Date*1){over=true;return}
                         c++
                 }
                 setInterval(()=>{if(st+5000<=new Date*1){over=true};if(over){document.getElementById("c").disabled=true;document.getElementById("c").innerHTML="Your score was:"+c/5;clearInterval()}},1)
         </script>
         <h1>CPS test!</h1>
-        <button id="c" onclick="go()" width="200px" height="200px">Click to start!</button>
+        <button id="c" onclick="g()" width="200px" height="200px">Click to start!</button>
 </body>
