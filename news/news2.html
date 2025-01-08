@@ -1,0 +1,69 @@
+<body onload="init()">
+<style>
+	* {
+		text-align:center;
+		font-weight:bold;
+	}
+	h1 {
+		background-color:red;
+	}
+	hr
+</style>
+<script>
+train=(data)=>{
+	re={};
+	data.split(" ").forEach((v,i)=>{re[v]=[]});
+	data.split(" ").forEach((v,i)=>{if(data.split(" ")[i+1]!=undefined){re[v].push(data.split(" ")[i+1])}});
+	return re;
+}
+sample=(data,len)=>{
+	re=[];
+	re.push(choose(Object.keys(data)));
+	for(let i=0;i<len;i++){
+		if(data[re[re.length-1]].length==0){
+			re.push(choose(Object.keys(data)));
+		} else {
+			re.push(choose(data[re[re.length-1]]));
+		}
+	}
+	return re.join(" ");
+}
+choose=(list)=>{
+	return list[Math.floor(list.length*Math.random())];
+}
+titleCase=(str)=>{
+	re=[]
+	str.split(" ").forEach((v,i)=>{re.push(v[0].toUpperCase()+v.slice(1))})
+	return re.join(" ")
+}
+init=()=>{
+	document.getElementById('title').innerHTML=titleCase(sample(train(data),5));
+	document.getElementById('main').innerHTML=sample(train(data),500);
+	document.getElementById('title2').innerHTML=titleCase(sample(train(data2),5));
+	document.getElementById('main2').innerHTML=sample(train(data2),500);
+	document.getElementById('main3').innerHTML=sample(train(data3),500);
+	document.getElementById('main4').innerHTML=sample(train(data4),500);
+	document.getElementById('main5').innerHTML='<img src="/pancake/image/talk.gif"></img>'.repeat(100)
+}
+data=`Hello and welcome to the real news firm there are very import news articles for you to read today and I bet that you are excited to browse the newest of all news . This is very exiting for you but you are not allowed to read the real news because you have not paid us enough money . If you pay us more than you will get better quality of news which I am sure that you are exited for .`;
+
+data2=`I was at the casino the other day and I was gambling and eating really expensive french fries that I bought at the shop where everything costs a lot of money . So I was using the slot machine and I won the jackpot that is right I hit it big at the casino and now I am a very happy person . The people who worked at the casino then came and told me that I was not supposed to win and that I must have broken the slot machine . The casino then sued me for all of my money except I did not have any money because they took it all last time that they sued me .`;
+
+data3=`Thank you for visiting pancake . We are grateful for pancake . We need panacke . Pancake is pancake which is good . Support pancake and worship pancake like us . You need pancake . Pancake is the reality . Pancake is required .`;
+
+data4=`For years our mission has been to make the worlds largest cat and we think that we have finally done it . We have never thought that we would be able to do this because we never had any money and we need money to buy food to expand the cat . We are finally happy about this because this is a huge innovation in the technological world and we are excited to have finally done this . We have hired a team of food feeders to feed the cat so that it will grow larger but our food feeders all quit so now our project is on hold but we are exited for it to resume again .`;
+</script>
+<button onclick="history.go(-1)">Back</button>
+<h1>BREAKING NEWS</h1>
+<h2 id="title"></h2>
+<p id="main"></p>
+<hr>
+<h1>IN OTHER NEWS</h1>
+<h2 id="title2"></h2>
+<p id="main2"></p>
+<hr>
+<h3>ADS</h3>
+<marquee behavior="scroll" width="100%" height="50px" direction="left" scrollamount="10" id='main3' onmouseover="this.stop()" onmouseout="this.start()"></marquee>
+<marquee behavior="scroll" width="100%" height="50px" direction="left" scrollamount="10" id='main4' onmouseover="this.stop()" onmouseout="this.start()"></marquee>
+<marquee behavior="scroll" width="100%" height="50px" direction="left" scrollamount="10" id='main5' onmouseover="this.stop()" onmouseout="this.start()"></marquee>
+</body>

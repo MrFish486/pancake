@@ -1,0 +1,54 @@
+<body onload="init()">
+<script>
+train=(data)=>{
+	re={};
+	data.split(" ").forEach((v,i)=>{re[v]=[]});
+	data.split(" ").forEach((v,i)=>{if(data.split(" ")[i+1]!=undefined){re[v].push(data.split(" ")[i+1])}});
+	return re;
+}
+sample=(data,len)=>{
+	re=[];
+	re.push(choose(Object.keys(data)));
+	for(let i=0;i<len;i++){
+		if(data[re[re.length-1]].length==0){
+			re.push(choose(Object.keys(data)));
+		} else {
+			re.push(choose(data[re[re.length-1]]));
+		}
+	}
+	return re.join(" ");
+}
+choose=(list)=>{
+	return list[Math.floor(list.length*Math.random())];
+}
+titleCase=(str)=>{
+	re=[]
+	str.split(" ").forEach((v,i)=>{re.push(v[0].toUpperCase()+v.slice(1))})
+	return re.join(" ")
+}
+init=()=>{
+	document.getElementById('title').innerHTML=titleCase(sample(train(data),5));
+	document.getElementById('main').innerHTML=sample(train(data),2000);
+	document.getElementById('title2').innerHTML=titleCase(sample(train(data2),5));
+	document.getElementById('main2').innerHTML=sample(train(data2),2000);
+	document.getElementById('main3').innerHTML=sample(train(data3),500);
+	document.getElementById('main4').innerHTML=sample(train(data4),500);
+}
+data=`Last night I was riding my bicicle in the park and I said to myself ' I need a new washing machine ' so I bought a new washing machine but then my dog ate it so I no longer have a washing machine but it is okay because I still have my house which I have had since the gold rush . Sometimes I think about why I have so many pencils and I never know why . Now I am sad because there is a lobster and a praying mantis and they are both solving a puzzle together but it does not matter because I created a very abstract peice of art and you can not have it because it is mine . Ever since I bought a new phone I have been playing cards every Tuesday but that still makes me feel angry due to the amount of flowers that are sages and do not have bumble bees . I will say that it needs a 200-volt battery if it does not have a 200-volt resistor . This is the kind of intelligence that I look for when employing new employees to become employers to employ new employees . The calender has told me to not read but I have a banana so it does not matter because of that jar of coins that is staring at me . I will never tell you to go away if you have a 200-volt bumble bee next to you in your house . That is not a way to talk to your dog . Our reporters are on the spot and recording videos of this rare occurance . I never knew that such a thing could happen especially when I did not think about my life . This has absolutely ruined everything and this makes me sad so I said ' I know exactly what will fix this ' . The perfect combination between spiders and dog . That is not a lie because I have never lied to a valuable customer and I wish that that was not false because it is not what I normally would have done if I had been aware and known about this . This is not only exciting but also a major breakthrough in science and I have never met such a smart roof .`;
+data2=`Dasher and prancer have escaped the colonies and are now roaming free from popular field . Brought to you by a store near you . This is terrible because we would have made it if not for the several minutes when there was no slime in our glass . This is truly tragic and I am now dissapointed but not quite infuriated at the lemons in our world . That was a close one says our official quality standard who has never said official to a user . Our product is free from lead if you purchase a premium plan and this is unfortunate because you can not afford that . Officials say that they have captured the banana but do not know who is behind this terrible crime .`;
+data3=`We are so sorry that there is an ad section but we have to make money off of our newspaper and if there was not an ad section then we would not be able to make money . That would be very sad .  Now you can buy our product because you probably really want to buy our product which is nice because that is just what we need . We need you to give us your money and then we can spend the money and everybody will be happy except for you because you just gave us your money for no reason anyways you owe us lots of money and if you do not give it to us then we will have to tell people that you do not have any money .`
+data4=`For years our mission has been to make the worlds largest cat and we think that we have finally done it . We have never thought that we would be able to do this because we never had any money and we need money to buy food to expand the cat . We are finally happy about this because this is a huge innovation in the technological world and we are excited to have finally done this . We have hired a team of food feeders to feed the cat so that it will grow larger but our food feeders all quit so now our project is on hold but we are exited for it to resume again .`;
+</script>
+<button onclick="history.go(-1)">Back</button>
+<h1>BREAKING NEWS</h1>
+<h2 id="title"></h2>
+<a id="main"></a>
+<hr>
+<h1>IN OTHER NEWS</h1>
+<h2 id="title2"></h2>
+<a id="main2"></a>
+<hr>
+<h3>ADS</h3>
+<marquee behavior="scroll" width="100%" height="50px" direction="left" scrollamount="10" id='main3' onmouseover="this.stop()" onmouseout="this.start()"></marquee>
+<marquee behavior="scroll" width="100%" height="50px" direction="left" scrollamount="10" id='main4' onmouseover="this.stop()" onmouseout="this.start()"></marquee>
+</body>
