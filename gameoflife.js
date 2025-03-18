@@ -39,7 +39,7 @@ class board{
 	document.getElementById("ticking").innerHTML="Playing : "+playing
     }
     tick(){
-        let copy=this.board
+        let copy=JSON.parse(JSON.stringify(this.board))
         for(let x=0;x<this.width;x++){
             for(let y=0;y<this.width;y++){
                 let q=this.nieghbor(x,y)
