@@ -1,12 +1,21 @@
 class board{
-    constructor(width,height){
+    constructor(width,height,r){
         this.board=[]
-        for(let x=0;x<width;x++){
-            this.board.push([])
-            for(let y=0;y<height;y++){
-                this.board[x].push(Math.round(Math.random()))
+	if(r){
+            for(let x=0;x<width;x++){
+                this.board.push([])
+                for(let y=0;y<height;y++){
+                     this.board[x].push(Math.round(Math.random()))
+                }
             }
-        }
+	}else{
+            for(let x=0;x<width;x++){
+                this.board.push([])
+                for(let y=0;y<height;y++){
+                     this.board[x].push(0)
+                }
+            }
+	}
         this.height=height
         this.width=width
         this.tiles=width*height
@@ -75,7 +84,7 @@ class board{
     }
 }
 //Setup
-life=new board(50,50)
+life=new board(50,50,true)
 //setInterval(()=>{life.tick();life.render(document.getElementById("game"))},5000)
 playing=false
 setInterval(()=>{life.render(document.getElementById("game"))},100)
@@ -93,13 +102,17 @@ document.addEventListener('keydown',(e)=>{
 		playpause()
 	}else if(e.code=="ArrowUp"&&life.cursor[1]>0){
 		life.cursor[1]--
-	}else if(e.code=="ArrowDown"&&life.cursor[1]<life.width){
+	}else if(e.code=="ArrowDown"&&life.cursor[1]<life.width-1){
                 life.cursor[1]++
         }else if(e.code=="ArrowLeft"&&life.cursor[0]>0){
                 life.cursor[0]--
-        }else if(e.code=="ArrowRight"&&life.cursor[0]<life.height){
+        }else if(e.code=="ArrowRight"&&life.cursor[0]<life.height-1){
                 life.cursor[0]++
         }else if(e.code=="Space"){
 		life.board[life.cursor[0]][life.cursor[1]]=Number(!life.board[life.cursor[0]][life.cursor[1]])
+	}else if(e.code=="KeyX"){
+		let p=JSON.parse(JSON.stringify(life.cursor))
+		life=new board(50,50,false)
+		life.cursor=p
 	}
 })
