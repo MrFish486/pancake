@@ -1,6 +1,9 @@
 <head>
     <title>Pancake</title>
     <link rel="icon" href="image/pancake.jpg">
+    <script>
+    p=(f)=>{return new Promise((rs,rj)=>{let c='';let r=new FileReader();r.onload=(e)=>{rs(e.target.result.split("/\r\n|\n/"))};r.onerror=(e)=>{rj(e)};r.readAsText(f)})};
+    </script>
 </head>
 <body>
 	<a href="/pancake">Home</a><br>
@@ -10,5 +13,7 @@
 	<a>Tick interval : </a><input type="range" min="0" max="100" value="50" onchange="interval=this.value;playpause();playpause()"></input><br>
 	<a id="days">Days : 0</a><br>
 	<h2>A <s>slightly broken</s> game of life simulation.</h2>
-	<a>Z to pause/play, arrow keys and space to edit board. Use X to clear the board.</a>
+	<a>Z to pause/play, arrow keys and space to edit board. Use X to clear the board.</a><br><br>
+	<a>Upload saved state : </a><input type="file" id="upld" onchange="p(this.files[0]).then(e=>{let q=JSON.parse(e[0]);life.board=q})"></input><br>
+	<button onclick="let b=new Blob([`${JSON.stringify(life.board)}`],{'type':'text/plain'});let l=document.createElement('a');l.href=globalThis.URL.createObjectURL(b);l.download='board.state';l.click();URL.revokeObjectURL(l.href)">Download board state</button>
 </body>
