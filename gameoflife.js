@@ -46,6 +46,7 @@ class board{
             }
         }
 	document.getElementById("ticking").innerHTML="Playing : "+playing
+	document.getElementById("days").innerHTML="Days : "+days
     }
     tick(){
         let copy=JSON.parse(JSON.stringify(this.board))
@@ -84,19 +85,27 @@ class board{
     }
 }
 //Setup
+days=0
 life=new board(50,50,true)
 //setInterval(()=>{life.tick();life.render(document.getElementById("game"))},5000)
 playing=false
-setInterval(()=>{life.render(document.getElementById("game"))},100)
+interval=50
+setInterval(()=>{life.render(document.getElementById("game"))},0)
 playpause=()=>{
 	if(playing){
 		clearInterval(id)
 		playing=false
 	}else{
-		id=setInterval(()=>{life.tick()},100)
+		id=setInterval(()=>{life.tick();days++},interval)
 		playing=true
 	}
 }
+document.onkeydown = (e)=>{ // Trap arrow keys (to stop scrolling)
+	e = e || window.event;
+	if(e.keyCode >= 37 && e.keyCode <= 40 || e.keyCode == 32){
+		return false;
+	}
+};
 document.addEventListener('keydown',(e)=>{
 	if(e.code=="KeyZ"){
 		playpause()

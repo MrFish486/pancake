@@ -7,6 +7,8 @@
 	<script src="./gameoflife.js"></script>
 	<canvas height="500px" width="500px" style="border:2px solid black" id="game"></canvas><br>
 	<a id="ticking"></a><br>
+	<a>Tick interval : </a><input type="range" min="0" max="100" value="50" onchange="interval=this.value;playpause();playpause()"></input><br>
+	<a id="days">Days : 0</a><br>
 	<h2>A <s>slightly broken</s> game of life simulation.</h2>
 	<a>Z to pause/play, arrow keys and space to edit board. Use X to clear the board.</a>
 </body>
