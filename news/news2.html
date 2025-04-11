@@ -40,13 +40,18 @@ titleCase=(str)=>{
 	str.split(" ").forEach((v,i)=>{re.push(v[0].toUpperCase()+v.slice(1))})
 	return re.join(" ")
 }
+p=s=>{
+	re=s.split(" ")
+	re.forEach((v,i)=>{if(re[i+1]=="."){re[i]+=".";re.splice(i+1,1)}})
+	return re.join(" ")
+}
 init=()=>{
-	document.getElementById('title').innerHTML=titleCase(sample(train(data),5));
-	document.getElementById('main').innerHTML=sample(train(data),500);
-	document.getElementById('title2').innerHTML=titleCase(sample(train(data2),5));
-	document.getElementById('main2').innerHTML=sample(train(data2),500);
-	document.getElementById('main3').innerHTML=sample(train(data3),500);
-	document.getElementById('main4').innerHTML=sample(train(data4),500);
+	document.getElementById('title').innerHTML=p(titleCase(sample(train(data),5)));
+	document.getElementById('main').innerHTML=p(sample(train(data),500));
+	document.getElementById('title2').innerHTML=p(titleCase(sample(train(data2),5)));
+	document.getElementById('main2').innerHTML=p(sample(train(data2),500));
+	document.getElementById('main3').innerHTML=p(sample(train(data3),500));
+	document.getElementById('main4').innerHTML=p(sample(train(data4),500));
 	document.getElementById('main5').innerHTML='<img src="/pancake/image/talk.gif"></img>'.repeat(100)
 }
 data=`Hello and welcome to the real news firm there are very import news articles for you to read today and I bet that you are excited to browse the newest of all news . This is very exciting for you but you are not allowed to read the real news because you have not paid us enough money . If you pay us more than you will get better quality of news which I am sure that you are excited for .`;
