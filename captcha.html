@@ -1,13 +1,18 @@
 <a href="/pancake">Home</a><br>
 <head>
     <title>Pancake</title>
+    <style>body{background-color:ffe;text-align:center;};div.c{border:2px solid black;margin-left:30%;width:40%;display:block;}</style>
     <link rel="icon" href="image/pancake.jpg">
 </head>
 <body onload='s=0;p=[0.5,7,13,19];a=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0"];c="";let x=100+Math.random()*10;let y=100+Math.random()*10;let r=p[Math.round(Math.random()*p.length)];for(let i=0;i<10;i++){c+=a[Math.round(Math.random()*61)]};let t=document.getElementById("captcha").getContext("2d");t.save();t.rotate(r);t.font="30px sans serif";t.fillText(c,x,y);t.restore();t.beginPath();t.moveTo(x,y);t.lineTo(x+Math.random()*10,y+Math.random*5);t.stroke();t.closePath()'>
 <h1>Want to do captchas? You have come to the right place!</h1>
-<canvas id="captcha" width="1000" height="400"></canvas>
+<canvas id="captcha" width="500" height="500" style="border:2px solid black;background-color: #aef;"></canvas>
+<br><br>
+<div class="c">
+    <input id="in"></input><button onclick='if(document.getElementById("in").value==c){document.getElementById("in").value="";let l=document.getElementById("captcha");l.getContext("2d").clearRect(0,0,l.width,l.height);s+=1;document.getElementById("score").innerHTML=`Score: ${s}`;p=[0.5,7,13,19];a=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0"];c="";let x=100+Math.random()*10;let y=100+Math.random()*10;let r=p[Math.round(Math.random()*p.length)];for(let i=0;i<10;i++){c+=a[Math.round(Math.random()*61)]};let t=document.getElementById("captcha").getContext("2d");t.save();t.rotate(r);t.font="30px sans serif";t.fillText(c,x,y);t.restore();t.beginPath();t.moveTo(x,y);t.lineTo(x+Math.random()*10,y+Math.random*5);t.stroke();t.closePath()}' style="background-color:fef;">Submit</button>
+</div>
 <br>
-<input id="in"></input><button onclick='if(document.getElementById("in").value==c){document.getElementById("in").value="";let l=document.getElementById("captcha");l.getContext("2d").clearRect(0,0,l.width,l.height);s+=1;document.getElementById("score").innerHTML=s;s=0;p=[0.5,7,13,19];a=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0"];c="";let x=100+Math.random()*10;let y=100+Math.random()*10;let r=p[Math.round(Math.random()*p.length)];for(let i=0;i<10;i++){c+=a[Math.round(Math.random()*61)]};let t=document.getElementById("captcha").getContext("2d");t.save();t.rotate(r);t.font="30px sans serif";t.fillText(c,x,y);t.restore();t.beginPath();t.moveTo(x,y);t.lineTo(x+Math.random()*10,y+Math.random*5);t.stroke();t.closePath()}'>Submit</button>
-<br>
-<a id="score">0</a>
+<div class="c">
+    <a id="score">Score: 0</a>
+</div>
 </body>
